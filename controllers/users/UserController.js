@@ -1,3 +1,5 @@
+const userModel = require('../../models/users/userModel');
+
 class UserController {
   // 用户登录
   async login(ctx, next) {
@@ -27,6 +29,12 @@ class UserController {
       status: true,
       data
     };
+  }
+
+  // 获取所有的用户信息
+  async userAllInfo(ctx, next) {
+    let data = await userModel.userAllInfo();
+    ctx.body = data;
   }
 }
 
