@@ -7,16 +7,21 @@ const onerror = require('koa-onerror');
 const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
 const router = require('koa-router');
+var cors = require('koa2-cors');
 const requireDirectory = require('require-directory'); // 路由的自动加载
-// require('module-alias') 路径别名
+const moduleAlias = require('module-alias'); // 路径别名
 
-// const index = require('./routes/index'); // 手动加载路由
-// const users = require('./routes/users');
+// 路径别名
+moduleAlias.addAliases({
+  '@': __dirname
+  // '@upload': __dirname + 'public/upload'
+});
 
 // error handler
 onerror(app);
 
 // middlewares
+app.use(cors()); // 跨域
 app.use(
   bodyparser({
     enableTypes: ['json', 'form', 'text']
@@ -47,8 +52,10 @@ const router_root = router();
 router_root.prefix('/api');
 
 // 1.1 手动加载路由
+// const index = require('./routes/index'); // 手动加载路由
+// const user = require('./routes/user');
 // router_root.use(index.routes(), index.allowedMethods());
-// router_root.use(users.routes(), users.allowedMethods());
+// router_root.use(user.routes(), user.allowedMethods());
 
 // 1.2 自动加载路由
 const modules = requireDirectory(module, './routes', {
@@ -65,6 +72,6 @@ app.use(router_root.routes(), router_root.allowedMethods());
 
 // 2. 不配置根路由
 // app.use(index.routes(), index.allowedMethods());
-// app.use(users.routes(), users.allowedMethods());
+// app.use(user.routes(), user.allowedMethods());
 
 module.exports = app;

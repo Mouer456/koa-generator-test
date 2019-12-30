@@ -1,12 +1,13 @@
 const router = require('koa-router')();
-const usersController = require('../controllers/usersController');
+const userController = require('@/controllers/userController');
 
-router.prefix('/users');
+router.prefix('/user');
 
 // 用户模块
-router.post('/login', usersController.login);
-router.get('/userinfo', usersController.userInfo);
-router.get('/userAllInfo', usersController.userAllInfo);
+router.post('/login', userController.login);
+router.get('/userinfo', userController.userInfo);
+router.get('/userAllInfo', userController.userAllInfo);
+router.post('/upload/file', userController.uploadFile); // 上传文件/图片
 
 // 接口格式定义
 // router.prefix('/user');
