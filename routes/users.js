@@ -1,12 +1,12 @@
 const router = require('koa-router')();
-const userController = require('../controllers/users/userController');
+const usersController = require('../controllers/usersController');
 
 router.prefix('/users');
 
 // 用户模块
-router.post('/login', userController.login);
-router.get('/userinfo', userController.userInfo);
-router.get('/userAllInfo', userController.userAllInfo);
+router.post('/login', usersController.login);
+router.get('/userinfo', usersController.userInfo);
+router.get('/userAllInfo', usersController.userAllInfo);
 
 // 接口格式定义
 // router.prefix('/user');

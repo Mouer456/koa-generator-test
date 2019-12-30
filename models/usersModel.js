@@ -1,6 +1,6 @@
-const { query } = require('../../util/db');
+const { query } = require('../util/db');
 
-class UserModel {
+class usersModel {
   // 获取所有的用户信息
   async userAllInfo() {
     let sql = 'SELECT * FROM user';
@@ -9,4 +9,4 @@ class UserModel {
   }
 }
 
-module.exports = new UserModel();
+module.exports = new usersModel();

@@ -1,6 +1,6 @@
-const userModel = require('../../models/users/userModel');
+const usersModel = require('../models/usersModel');
 
-class UserController {
+class UsersController {
   // 用户登录
   async login(ctx, next) {
     // 获取请求提交的数据
@@ -33,9 +33,9 @@ class UserController {
 
   // 获取所有的用户信息
   async userAllInfo(ctx, next) {
-    let data = await userModel.userAllInfo();
+    let data = await usersModel.userAllInfo();
     ctx.body = data;
   }
 }
 
-module.exports = new UserController();
+module.exports = new UsersController();
