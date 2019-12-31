@@ -7,9 +7,10 @@ const onerror = require('koa-onerror');
 const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
 const router = require('koa-router');
-var cors = require('koa2-cors');
+const cors = require('koa2-cors');
 const requireDirectory = require('require-directory'); // 路由的自动加载
 const moduleAlias = require('module-alias'); // 路径别名
+const koaStatic = require('koa-static');
 
 // 路径别名
 moduleAlias.addAliases({
@@ -29,7 +30,9 @@ app.use(
 );
 app.use(json());
 app.use(logger());
-app.use(require('koa-static')(__dirname + '/public'));
+
+app.use(koaStatic(__dirname + '/web')); // 静态资源 web ：存在前端页面代码
+app.use(koaStatic(__dirname + '/public')); // 静态资源 public ：存放资源文件
 
 // logger
 app.use(async (ctx, next) => {
